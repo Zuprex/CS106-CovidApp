@@ -3,13 +3,24 @@
 
 #include <string>
 #include <QWidget>
+#include <QMap>
 
 
 class userType
 {
 public:
 
-    // Variables
+    // Constructor - Public - The creation of a user.
+
+    userType();
+
+    userType(QString user, QString pass, QString fName, QString lName, QString gender, QString age);
+
+private:
+
+    // Variables - These are set to private thus directly accessing these information must be accessed through getters and setters which are set to public.
+
+    // Basic User Info
 
     QString username;
     QString password;
@@ -18,9 +29,35 @@ public:
     QString gender;
     QString age;
 
-    // Constructor
+    // Vaccine Status Info
 
-    userType(QString user, QString pass, QString fName, QString lName, QString gender, QString age);
+    bool firstVac;
+    bool secondVac;
+    bool boosterVac;
+
+    // Vaccine Test List using maps (Key = Time / Value = Positive/Negative)
+
+    QMap<QString,QString> userTestList;
+
+    // Implementation and declaration of some of these function will be here on the header as their instructions are one line of coode thus using 'inline'.
+    //
+
+public:
+
+    // Getters
+
+    inline QString getUsername(){return this->username;}
+    inline QString getPassword(){return this->password;}
+    inline QString getFirstName(){return this->firstName;}
+    inline QString getLastName(){return this->lastName;}
+
+    // Vaccine States:
+
+    inline bool getFirstVac(){return this->firstVac;}
+    inline bool getSecondVac(){return this->secondVac;}
+    inline bool getBoosterVac(){return this->boosterVac;}
+
+
 
 };
 
