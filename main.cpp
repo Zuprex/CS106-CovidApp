@@ -1,3 +1,4 @@
+#include "usertype.h"
 #include "mainwindow.h"
 
 #include <QApplication>

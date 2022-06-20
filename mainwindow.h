@@ -20,6 +20,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    bool adminMode = false;
+
     QVector<userType> users;
 
     QString currentUser;
@@ -33,13 +35,17 @@ private slots:
 
     void on_loginBttn_clicked();
 
-    void on_mainLoginBttn_clicked();
-
     void on_registerBttn_clicked();
 
     void on_logOutBttn_User_clicked();
 
-    void on_infoBttn_User_clicked();
+    void on_covidTestBttn_User_clicked();
+
+    void on_covidTestbackBttn_User_clicked();
+
+    void on_logOutBttn_Admin_clicked();
+
+    void on_searchUserBttn_Admin_clicked();
 
 private:
     Ui::MainWindow *ui;
