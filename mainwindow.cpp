@@ -3,10 +3,14 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
+    , adminMode(false)
+    , currentAdminUser("Admin")
+    , currentAdminPass("Charles")
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->invalidLogin_Label->hide();
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 MainWindow::~MainWindow()
@@ -16,7 +20,7 @@ MainWindow::~MainWindow()
 
 
 // Main Menu (LoginRegister Widget) Buttons:
-// Widgets 0 : Login / 1 :  Register / 2 : User Menu / 3: covidTestsPage
+// Widgets 0 : Login / 1 :  Register / 2 : User Menu / 3: covidTestsPage / 4: Admin Menu
 //-------------------------------------------
 
 // Registration (RegisterPage Widget) Buttons:
@@ -59,7 +63,7 @@ void MainWindow::on_loginBttn_clicked() // Attempts to login
     QString username = ui->user_Login_Line_Edit->text();
     QString password = ui->pass_Password_Line_Edit->text();
 
-    for(userType& i : users){
+    for(userType &i : users){
 
         if(i.getUsername() == username && i.getPassword() == password){
 
@@ -93,6 +97,13 @@ void MainWindow::on_loginBttn_clicked() // Attempts to login
             ui->stackedWidget->setCurrentIndex(2);
 
         }
+        else if(currentAdminUser == username && currentAdminPass == password){
+
+            adminMode = true;
+            ui->stackedWidget->setCurrentIndex(4);
+
+
+        }
         else{
 
             ui->invalidLogin_Label->show();
@@ -111,18 +122,29 @@ void MainWindow::on_loginBttn_clicked() // Attempts to login
 void MainWindow::on_logOutBttn_User_clicked() // Logout and return to main page.
 {
 
+    ui->invalidLogin_Label->hide();
 
     if(adminMode == true){
 
+        ui->stackedWidget->setCurrentIndex(4);
+
+        for(userType& i : users){
+
+            if(i.getUsername() == currentUser && i.getPassword() == currentPass){
+
+                i.setFirstVac(ui->firstVacCheck_User->checkState());
+                i.setSecondVac(ui->secondVacCheck_User->checkState());
+                i.setBoosterVac(ui->boosterCheck_User->checkState());
+
+            }
+
+
+        }
+
 
 
     }
-    else{
-
-        ui->invalidLogin_Label->hide();
-        ui->stackedWidget->setCurrentIndex(0);
-
-    }
+    else{ui->stackedWidget->setCurrentIndex(0);}
 
 }
 
@@ -146,6 +168,7 @@ void MainWindow::on_logOutBttn_Admin_clicked() // Go back to login
 {
     ui->invalidLogin_Label->hide();
     ui->stackedWidget->setCurrentIndex(0);
+    adminMode = false;
 }
 
 void MainWindow::on_searchUserBttn_Admin_clicked() // Search for a specific user.
@@ -163,9 +186,9 @@ void MainWindow::on_searchUserBttn_Admin_clicked() // Search for a specific user
 
             ui->stackedWidget->setCurrentIndex(2);
 
-            on_logOutBttn_User_clicked();
-
-
+            ui->firstVacCheck_User->setEnabled(true);
+            ui->secondVacCheck_User->setEnabled(true);
+            ui->boosterCheck_User->setEnabled(true);
 
         }
 
@@ -173,4 +196,18 @@ void MainWindow::on_searchUserBttn_Admin_clicked() // Search for a specific user
 
 
 }
+
+//userType MainWindow::searchUser(QString fName,QString lName){
+
+//    for(userType& i : users){
+
+//        if(i.getFirstName() == fName && i.getLastName() == lName){
+
+//            return i;
+
+//        }
+
+//    }
+
+//}
 

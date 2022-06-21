@@ -20,12 +20,17 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    bool adminMode = false;
+    bool adminMode;
 
     QVector<userType> users;
 
     QString currentUser;
     QString currentPass;
+
+    // The only
+
+    QString currentAdminUser;
+    QString currentAdminPass;
 
 private slots:
 
@@ -46,6 +51,8 @@ private slots:
     void on_logOutBttn_Admin_clicked();
 
     void on_searchUserBttn_Admin_clicked();
+
+    //userType searchUser(QString fName,QString lName);
 
 private:
     Ui::MainWindow *ui;
