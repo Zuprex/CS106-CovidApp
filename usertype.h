@@ -57,6 +57,10 @@ public:
     inline bool getSecondVac(){return this->secondVac;}
     inline bool getBoosterVac(){return this->boosterVac;}
 
+    inline void setFirstVac(bool state){firstVac = state;}
+    inline void setSecondVac(bool state){secondVac = state;}
+    inline void setBoosterVac(bool state){boosterVac = state;}
+
 
 
 };
