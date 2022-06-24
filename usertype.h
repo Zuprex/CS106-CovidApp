@@ -39,6 +39,8 @@ private:
 
     QMap<QString,QString> userTestList;
 
+
+
     // Implementation and declaration of some of these function will be here on the header as their instructions are one line of coode thus using 'inline'.
     //
 
@@ -50,6 +52,17 @@ public:
     inline QString getPassword(){return this->password;}
     inline QString getFirstName(){return this->firstName;}
     inline QString getLastName(){return this->lastName;}
+    inline QString getGender(){return this->gender;}
+    inline QString getAge(){return this->age;}
+
+    // Setters for user info
+
+    inline void setAge(QString userAge){age = userAge;}
+    inline void setGender(QString userGender){gender = userGender;}
+
+
+    inline QMap<QString,QString> getUserTestList(){return this->userTestList;}
+    inline void insertUserTestList(QString k,QString v){userTestList.insert(k,v);}
 
     // Vaccine States:
 
@@ -60,6 +73,10 @@ public:
     inline void setFirstVac(bool state){firstVac = state;}
     inline void setSecondVac(bool state){secondVac = state;}
     inline void setBoosterVac(bool state){boosterVac = state;}
+
+
+    QString getVaccinationStatus();
+
 
 
 

@@ -177,7 +177,7 @@
         <item>
          <widget class="QLineEdit" name="userRegLine">
           <property name="text">
-           <string>Username</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -195,7 +195,7 @@
         <item>
          <widget class="QLineEdit" name="passRegLine">
           <property name="text">
-           <string>Username</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -213,7 +213,7 @@
         <item>
          <widget class="QLineEdit" name="fNameRegLine">
           <property name="text">
-           <string>Username</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -231,7 +231,7 @@
         <item>
          <widget class="QLineEdit" name="lNameRegLine">
           <property name="text">
-           <string>Username</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -249,7 +249,7 @@
         <item>
          <widget class="QLineEdit" name="ageRegLine">
           <property name="text">
-           <string>Username</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -267,7 +267,7 @@
         <item>
          <widget class="QLineEdit" name="genderRegLine">
           <property name="text">
-           <string>Username</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -325,7 +325,7 @@
      <property name="geometry">
       <rect>
        <x>80</x>
-       <y>240</y>
+       <y>310</y>
        <width>118</width>
        <height>175</height>
       </rect>
@@ -380,7 +380,7 @@
      <property name="geometry">
       <rect>
        <x>70</x>
-       <y>90</y>
+       <y>150</y>
        <width>134</width>
        <height>94</height>
       </rect>
@@ -418,6 +418,76 @@
       </item>
      </layout>
     </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>260</y>
+       <width>179</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_9">
+      <item>
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>Vaccination Status:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="vaccinationStatusLabel">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>60</y>
+       <width>140</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_10">
+      <item>
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Age:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="userAgeLine"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>100</y>
+       <width>157</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_11">
+      <item>
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Gender:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="userGenderLine"/>
+      </item>
+     </layout>
+    </widget>
    </widget>
    <widget class="QWidget" name="covidTestsPage">
     <widget class="QLabel" name="covidTestsLabel">
@@ -438,7 +508,7 @@
       <string>Your COVID-19 Tests</string>
      </property>
     </widget>
-    <widget class="QListWidget" name="listWidget">
+    <widget class="QListWidget" name="covidTestList">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -460,6 +530,49 @@
      <property name="text">
       <string>Return</string>
      </property>
+    </widget>
+    <widget class="QDateEdit" name="covidTestDate">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>320</y>
+       <width>110</width>
+       <height>25</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="submitTestBttn_Admin">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>360</y>
+       <width>80</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Submit</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="covidTestState">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>320</y>
+       <width>72</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>Positive</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Negative</string>
+      </property>
+     </item>
     </widget>
    </widget>
    <widget class="QWidget" name="AdminMenuPage">

@@ -11,12 +11,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->invalidLogin_Label->hide();
     ui->stackedWidget->setCurrentIndex(0);
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 
 
 // Main Menu (LoginRegister Widget) Buttons:
@@ -48,6 +50,13 @@ void MainWindow::on_registerBttn_clicked() // Attempts to create user account.
 
     ui->invalidLogin_Label->hide();
     ui->stackedWidget->setCurrentIndex(0);
+
+    ui->userRegLine->clear();
+    ui->passRegLine->clear();
+    ui->fNameRegLine->clear();
+    ui->lNameRegLine->clear();
+    ui->genderRegLine->clear();
+    ui->ageRegLine->clear();
 }
 
 // Login (LoginPage Widget) Buttons:
@@ -58,12 +67,13 @@ void MainWindow::on_mainRegisterBttn_clicked() // Goes to registration page
     ui->stackedWidget->setCurrentIndex(1);
 }
 
-void MainWindow::on_loginBttn_clicked() // Attempts to login
+void MainWindow::on_loginBttn_clicked() // Attempts to login NOTE: For realism; can not access admin account without atleast 1 registered user vector will be empty + pointless to use admin as its sole purpose is to modify user accounts.
 {
     QString username = ui->user_Login_Line_Edit->text();
     QString password = ui->pass_Password_Line_Edit->text();
 
     for(userType &i : users){
+
 
         if(i.getUsername() == username && i.getPassword() == password){
 
@@ -86,21 +96,45 @@ void MainWindow::on_loginBttn_clicked() // Attempts to login
             if(i.getBoosterVac() == true){ui->boosterCheck_User->setChecked(true);}
             else {ui->boosterCheck_User->setChecked(false);}
 
-            // Set tick boxes to be unmodifiable.
+            // Check user's basic info (age/gender) and implement proper info to LINE EDITS
+
+            ui->userAgeLine->setText(i.getAge());
+            ui->userGenderLine->setText(i.getGender());
+
+            // Set User info to be unmodifiable (Tickboxes and specific lineEdits)
 
             ui->firstVacCheck_User->setEnabled(false);
             ui->secondVacCheck_User->setEnabled(false);
             ui->boosterCheck_User->setEnabled(false);
+            ui->userAgeLine->setEnabled(false);
+            ui->userGenderLine->setEnabled(false);
+
+            // Set Covid Testing to be view mode only.
+
+            ui->covidTestDate->hide();
+            ui->covidTestState->hide();
+            ui->submitTestBttn_Admin->hide();
+
+            // Vaccination Status
+
+            ui->vaccinationStatusLabel->setText(i.getVaccinationStatus());
 
             // Change to User Page
 
             ui->stackedWidget->setCurrentIndex(2);
+
 
         }
         else if(currentAdminUser == username && currentAdminPass == password){
 
             adminMode = true;
             ui->stackedWidget->setCurrentIndex(4);
+
+            // Set Covid Testing to be view mode only.
+
+            ui->covidTestDate->show();
+            ui->covidTestState->show();
+            ui->submitTestBttn_Admin->show();
 
 
         }
@@ -124,7 +158,7 @@ void MainWindow::on_logOutBttn_User_clicked() // Logout and return to main page.
 
     ui->invalidLogin_Label->hide();
 
-    if(adminMode == true){
+    if(adminMode == true){ // Apply Changes in admin Mode.
 
         ui->stackedWidget->setCurrentIndex(4);
 
@@ -135,10 +169,9 @@ void MainWindow::on_logOutBttn_User_clicked() // Logout and return to main page.
                 i.setFirstVac(ui->firstVacCheck_User->checkState());
                 i.setSecondVac(ui->secondVacCheck_User->checkState());
                 i.setBoosterVac(ui->boosterCheck_User->checkState());
-
+                i.setAge(ui->userAgeLine->text());
+                i.setGender(ui->userGenderLine->text());
             }
-
-
         }
 
 
@@ -152,6 +185,21 @@ void MainWindow::on_logOutBttn_User_clicked() // Logout and return to main page.
 void MainWindow::on_covidTestBttn_User_clicked() // View the users' list of covid testing
 {
     ui->stackedWidget->setCurrentIndex(3);
+
+    if(searchUser().getUserTestList().empty()){}
+    else{
+
+        for(auto &e : searchUser().getUserTestList().keys()){
+
+            ui->covidTestList->addItem(e + " " + searchUser().getUserTestList().value(e));
+
+
+        }
+
+    }
+
+
+
 }
 
 // Covid Test Page (covidTestsPage Widget) Buttons:
@@ -159,7 +207,27 @@ void MainWindow::on_covidTestBttn_User_clicked() // View the users' list of covi
 
 void MainWindow::on_covidTestbackBttn_User_clicked() // Go back to user menu.
 {
+    ui->covidTestList->clear();
     ui->stackedWidget->setCurrentIndex(2);
+}
+
+void MainWindow::on_submitTestBttn_Admin_clicked() // Submit a covid test with date and result.
+{
+    ui->covidTestList->clear();
+    searchUser().insertUserTestList( ui->covidTestDate->text(),ui->covidTestState->currentText());
+    if(searchUser().getUserTestList().empty()){}
+    else{
+
+        ui->covidTestList->clear();
+
+        for(auto &e : searchUser().getUserTestList().keys()){
+
+            ui->covidTestList->addItem(e + " " + searchUser().getUserTestList().value(e));
+
+        }
+
+    }
+
 }
 
 // Admin Menu (AdminMenuPage Widget) Buttons:
@@ -189,6 +257,9 @@ void MainWindow::on_searchUserBttn_Admin_clicked() // Search for a specific user
             ui->firstVacCheck_User->setEnabled(true);
             ui->secondVacCheck_User->setEnabled(true);
             ui->boosterCheck_User->setEnabled(true);
+            ui->userAgeLine->setEnabled(true);
+            ui->userGenderLine->setEnabled(true);
+
 
         }
 
@@ -197,17 +268,15 @@ void MainWindow::on_searchUserBttn_Admin_clicked() // Search for a specific user
 
 }
 
-//userType MainWindow::searchUser(QString fName,QString lName){
+userType& MainWindow::searchUser(){
 
-//    for(userType& i : users){
+    for(userType &i : users){
+        if(i.getUsername() == currentUser && i.getPassword() == currentPass){
+            return i;
+        }
+    }
 
-//        if(i.getFirstName() == fName && i.getLastName() == lName){
+}
 
-//            return i;
 
-//        }
-
-//    }
-
-//}
 

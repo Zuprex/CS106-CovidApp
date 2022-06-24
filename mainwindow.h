@@ -4,6 +4,8 @@
 #include "usertype.h"
 #include <QWidget>
 #include <vector>
+#include <QMap>
+#include <QFile>
 
 using namespace std;
 
@@ -27,10 +29,14 @@ public:
     QString currentUser;
     QString currentPass;
 
-    // The only
+    // The only login for Admin (Integrated Login - No registration required)
 
     QString currentAdminUser;
     QString currentAdminPass;
+
+    // Methods
+
+    userType& searchUser();
 
 private slots:
 
@@ -52,7 +58,7 @@ private slots:
 
     void on_searchUserBttn_Admin_clicked();
 
-    //userType searchUser(QString fName,QString lName);
+    void on_submitTestBttn_Admin_clicked();
 
 private:
     Ui::MainWindow *ui;
