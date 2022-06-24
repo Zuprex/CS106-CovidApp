@@ -15,8 +15,16 @@ userType::userType(QString user, QString pass, QString fName, QString lName, QSt
     this->secondVac = false;
     this->boosterVac = false;
 
+}
 
-};
+QString userType::getVaccinationStatus()
+{
+
+    if(firstVac == true && secondVac == false){return QString("Partial");}
+    else if(firstVac == true && secondVac == true){return QString("Completed");}
+    else{return QString("Unvaccinated");}
+
+}
 
 
 
