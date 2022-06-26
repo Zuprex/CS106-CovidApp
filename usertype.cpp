@@ -2,8 +2,8 @@
 
 userType::userType(QString user, QString pass, QString fName, QString lName, QString gender, QString age){
 
-    this->username = user;
-    this->password = pass;
+    this->setUsername(user);
+    this->setPassword(pass);
     this->firstName = fName;
     this->lastName = lName;
     this->gender = gender;
@@ -14,6 +14,10 @@ userType::userType(QString user, QString pass, QString fName, QString lName, QSt
     this->firstVac = false;
     this->secondVac = false;
     this->boosterVac = false;
+
+    // No QR Code by default
+
+    imageQR = false;
 
 }
 

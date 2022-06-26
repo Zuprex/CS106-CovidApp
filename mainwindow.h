@@ -6,6 +6,7 @@
 #include <vector>
 #include <QMap>
 #include <QFile>
+#include <QTextStream>
 
 using namespace std;
 
@@ -25,6 +26,10 @@ public:
     bool adminMode;
 
     QVector<userType> users;
+
+    // Map container for QR Code request from users.
+
+    QMap<QString,QString> userQRList;
 
     QString currentUser;
     QString currentPass;
@@ -59,6 +64,14 @@ private slots:
     void on_searchUserBttn_Admin_clicked();
 
     void on_submitTestBttn_Admin_clicked();
+
+    void on_qrCodeBackBttn_User_clicked();
+
+    void on_QRCodeReqBttn_User_clicked();
+
+    void on_qrBttn_User_clicked();
+
+    void on_QRCodeAddBttn_Admin_clicked();
 
 private:
     Ui::MainWindow *ui;
