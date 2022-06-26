@@ -19,7 +19,17 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// Searches for user and returns address pointer to that user in the vector.
 
+userType& MainWindow::searchUser(){
+
+    for(userType &i : users){
+        if(i.getUsername() == currentUser && i.getPassword() == currentPass){
+            return i;
+        }
+    }
+
+}
 
 // Main Menu (LoginRegister Widget) Buttons:
 // Widgets 0 : Login / 1 :  Register / 2 : User Menu / 3: covidTestsPage / 4: Admin Menu
@@ -123,6 +133,14 @@ void MainWindow::on_loginBttn_clicked() // Attempts to login NOTE: For realism; 
 
             ui->stackedWidget->setCurrentIndex(2);
 
+            // Show QR Request Button
+
+            ui->QRCodeReqBttn_User->show();
+
+            // Hide add QR Button
+
+            ui->QRCodeAddBttn_Admin->hide();
+
 
         }
         else if(currentAdminUser == username && currentAdminPass == password){
@@ -135,6 +153,27 @@ void MainWindow::on_loginBttn_clicked() // Attempts to login NOTE: For realism; 
             ui->covidTestDate->show();
             ui->covidTestState->show();
             ui->submitTestBttn_Admin->show();
+
+            // Add users to widget list who requested a QR Code.
+
+            if(userQRList.isEmpty()){}
+            else{
+
+                for(auto &e : userQRList.keys()){
+
+                    ui->qrRequestList->addItem(e + " " +userQRList.value(e));
+
+                }
+
+            }
+
+            // Hide QR Request Button
+
+            ui->QRCodeReqBttn_User->hide();
+
+            // Show QR Add Button
+
+            ui->QRCodeAddBttn_Admin->show();
 
 
         }
@@ -152,6 +191,11 @@ void MainWindow::on_loginBttn_clicked() // Attempts to login NOTE: For realism; 
 
 // User Menu (UserMenuPage Widget) Buttons:
 //-------------------------------------------
+
+void MainWindow::on_qrBttn_User_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+}
 
 void MainWindow::on_logOutBttn_User_clicked() // Logout and return to main page.
 {
@@ -234,6 +278,7 @@ void MainWindow::on_submitTestBttn_Admin_clicked() // Submit a covid test with d
 
 void MainWindow::on_logOutBttn_Admin_clicked() // Go back to login
 {
+    ui->qrRequestList->clear();
     ui->invalidLogin_Label->hide();
     ui->stackedWidget->setCurrentIndex(0);
     adminMode = false;
@@ -268,15 +313,21 @@ void MainWindow::on_searchUserBttn_Admin_clicked() // Search for a specific user
 
 }
 
-userType& MainWindow::searchUser(){
+// QR Code Page (QRCode_UserPage)
 
-    for(userType &i : users){
-        if(i.getUsername() == currentUser && i.getPassword() == currentPass){
-            return i;
-        }
-    }
-
+void MainWindow::on_qrCodeBackBttn_User_clicked()
+{
+  ui->stackedWidget->setCurrentIndex(2);
 }
 
 
+void MainWindow::on_QRCodeReqBttn_User_clicked() // Request QR code from
+{
+  userQRList.insert(searchUser().getFirstName(),searchUser().getLastName());
+}
+
+void MainWindow::on_QRCodeAddBttn_Admin_clicked() // Adds QR Code when admin Mode
+{
+
+}
 

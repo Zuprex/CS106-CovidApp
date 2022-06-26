@@ -16,8 +16,12 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
+        accountType.h
+        accountType.cpp
         usertype.cpp
         usertype.h
+        adminType.h
+        adminType.cpp
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui

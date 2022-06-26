@@ -4,9 +4,9 @@
 #include <string>
 #include <QWidget>
 #include <QMap>
+#include "accounttype.h"
 
-
-class userType
+class userType : public accountType
 {
 public:
 
@@ -22,8 +22,6 @@ private:
 
     // Basic User Info
 
-    QString username;
-    QString password;
     QString firstName;
     QString lastName;
     QString gender;
@@ -39,7 +37,9 @@ private:
 
     QMap<QString,QString> userTestList;
 
+    // QR Code
 
+    bool imageQR;
 
     // Implementation and declaration of some of these function will be here on the header as their instructions are one line of coode thus using 'inline'.
     //
@@ -48,17 +48,17 @@ public:
 
     // Getters
 
-    inline QString getUsername(){return this->username;}
-    inline QString getPassword(){return this->password;}
     inline QString getFirstName(){return this->firstName;}
     inline QString getLastName(){return this->lastName;}
     inline QString getGender(){return this->gender;}
     inline QString getAge(){return this->age;}
+    inline bool getImageQR(){return this->imageQR;}
 
     // Setters for user info
 
     inline void setAge(QString userAge){age = userAge;}
     inline void setGender(QString userGender){gender = userGender;}
+    inline void setImageQR(bool qr){imageQR = qr;}
 
 
     inline QMap<QString,QString> getUserTestList(){return this->userTestList;}

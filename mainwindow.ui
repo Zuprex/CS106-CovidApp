@@ -50,7 +50,7 @@
     <bool>false</bool>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="LoginPage">
     <property name="sizePolicy">
@@ -418,13 +418,13 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>50</x>
        <y>260</y>
        <width>179</width>
-       <height>18</height>
+       <height>22</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_9">
@@ -444,13 +444,13 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>40</x>
        <y>60</y>
        <width>140</width>
-       <height>26</height>
+       <height>30</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -466,13 +466,13 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>40</x>
        <y>100</y>
        <width>157</width>
-       <height>26</height>
+       <height>30</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -580,7 +580,7 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>400</y>
+       <y>480</y>
        <width>83</width>
        <height>29</height>
       </rect>
@@ -626,6 +626,57 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="qrRequestList">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>250</y>
+       <width>256</width>
+       <height>192</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="QRCode_UserPage">
+    <widget class="QPushButton" name="qrCodeBackBttn_User">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>470</y>
+       <width>83</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Return</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="QRCodeReqBttn_User">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>420</y>
+       <width>131</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Request QR Code</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="QRCodeAddBttn_Admin">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>420</y>
+       <width>131</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Request QR Code</string>
      </property>
     </widget>
    </widget>
