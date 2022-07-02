@@ -602,41 +602,99 @@
       <string>Search User</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="searchFNameUserLine_Admin">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>140</y>
-       <width>113</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="searchLNameUserLine_Admin">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>140</y>
-       <width>113</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
     <widget class="QListWidget" name="qrRequestList">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>250</y>
+       <y>270</y>
        <width>256</width>
        <height>192</height>
       </rect>
      </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>240</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+     </property>
+     <property name="text">
+      <string>QR Code Requests:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>30</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+     </property>
+     <property name="text">
+      <string>ADMIN MENU</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>130</y>
+       <width>110</width>
+       <height>48</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>First Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="searchFNameUserLine_Admin">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>130</y>
+       <width>110</width>
+       <height>48</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <widget class="QLabel" name="label_13">
+        <property name="text">
+         <string>Last Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="searchLNameUserLine_Admin">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QWidget" name="QRCode_UserPage">
@@ -676,7 +734,20 @@
       </rect>
      </property>
      <property name="text">
-      <string>Request QR Code</string>
+      <string>Add QR Code</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="QRCodeImage">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>80</y>
+       <width>211</width>
+       <height>301</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
      </property>
     </widget>
    </widget>

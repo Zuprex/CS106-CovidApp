@@ -7,6 +7,7 @@
 #include <QMap>
 #include <QFile>
 #include <QTextStream>
+#include <QPixmap>
 
 using namespace std;
 
@@ -41,7 +42,12 @@ public:
 
     // Methods
 
+    void refreshQRList();
     userType& searchUser();
+
+    // QR Image
+
+    QPixmap *imageQR = new QPixmap("C:/Users/Charles/Documents/QTCreator Projects/CS106Assesment/codeQRImage.png");
 
 private slots:
 
