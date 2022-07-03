@@ -11,12 +11,32 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->invalidLogin_Label->hide();
     ui->stackedWidget->setCurrentIndex(0);
+    ui->QRCodeImage->setPixmap(*imageQR);
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+// Add users to widget list who requested a QR Code.
+
+void MainWindow::refreshQRList(){
+
+    if(userQRList.isEmpty()){}
+    else{
+
+        ui->qrRequestList->clear();
+        for(auto &e : userQRList.keys()){
+
+            ui->qrRequestList->addItem(e + " " +userQRList.value(e));
+
+        }
+
+    }
+
+
 }
 
 // Searches for user and returns address pointer to that user in the vector.
@@ -32,7 +52,7 @@ userType& MainWindow::searchUser(){
 }
 
 // Main Menu (LoginRegister Widget) Buttons:
-// Widgets 0 : Login / 1 :  Register / 2 : User Menu / 3: covidTestsPage / 4: Admin Menu
+// Widgets 0 : Login / 1 :  Register / 2 : User Menu / 3: covidTestsPage / 4: Admin Menu / 5: QRButton / 6: Report Bug
 //-------------------------------------------
 
 // Registration (RegisterPage Widget) Buttons:
@@ -141,6 +161,14 @@ void MainWindow::on_loginBttn_clicked() // Attempts to login NOTE: For realism; 
 
             ui->QRCodeAddBttn_Admin->hide();
 
+            // Set QR Code
+
+            if(searchUser().getImageQR() == true){
+                ui->QRCodeImage->show();
+                ui->QRCodeImage->setScaledContents(true);
+            }
+            else{ui->QRCodeImage->hide();}
+
 
         }
         else if(currentAdminUser == username && currentAdminPass == password){
@@ -154,18 +182,7 @@ void MainWindow::on_loginBttn_clicked() // Attempts to login NOTE: For realism; 
             ui->covidTestState->show();
             ui->submitTestBttn_Admin->show();
 
-            // Add users to widget list who requested a QR Code.
-
-            if(userQRList.isEmpty()){}
-            else{
-
-                for(auto &e : userQRList.keys()){
-
-                    ui->qrRequestList->addItem(e + " " +userQRList.value(e));
-
-                }
-
-            }
+            refreshQRList();
 
             // Hide QR Request Button
 
@@ -192,9 +209,15 @@ void MainWindow::on_loginBttn_clicked() // Attempts to login NOTE: For realism; 
 // User Menu (UserMenuPage Widget) Buttons:
 //-------------------------------------------
 
+void MainWindow::on_reportBugBttn_User_clicked() // Redirect to bug report page.
+{
+    ui->stackedWidget->setCurrentIndex(6);
+}
+
 void MainWindow::on_qrBttn_User_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
+
 }
 
 void MainWindow::on_logOutBttn_User_clicked() // Logout and return to main page.
@@ -305,6 +328,17 @@ void MainWindow::on_searchUserBttn_Admin_clicked() // Search for a specific user
             ui->userAgeLine->setEnabled(true);
             ui->userGenderLine->setEnabled(true);
 
+            ui->nameLine_User->setText(i.getUsername());
+            ui->userAgeLine->setText(i.getAge());
+            ui->userGenderLine->setText(i.getGender());
+            ui->vaccinationStatusLabel->setText(i.getVaccinationStatus());
+
+            if(searchUser().getImageQR() == true){
+                ui->QRCodeImage->show();
+                ui->QRCodeImage->setScaledContents(true);
+            }
+            else{ui->QRCodeImage->hide();}
+
 
         }
 
@@ -317,17 +351,45 @@ void MainWindow::on_searchUserBttn_Admin_clicked() // Search for a specific user
 
 void MainWindow::on_qrCodeBackBttn_User_clicked()
 {
-  ui->stackedWidget->setCurrentIndex(2);
+    ui->stackedWidget->setCurrentIndex(2);
 }
 
 
 void MainWindow::on_QRCodeReqBttn_User_clicked() // Request QR code from
 {
-  userQRList.insert(searchUser().getFirstName(),searchUser().getLastName());
+    userQRList.insert(searchUser().getFirstName(),searchUser().getLastName());
 }
 
 void MainWindow::on_QRCodeAddBttn_Admin_clicked() // Adds QR Code when admin Mode
 {
+    userQRList.remove(searchUser().getFirstName());
+    refreshQRList();
+    searchUser().setImageQR(true);
+}
+
+// Report Bug Page
+
+void MainWindow::on_bugReturnBttn_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+
+void MainWindow::on_submitBugBttn_clicked()
+{
+    QString bugReport = ui->bugPlainTextEdit->toPlainText();
+
+    QFile file("C:/Users/Charles/Documents/QTCreator Projects/CS106Assesment/bugReport.txt");
+
+    if(!file.open(QFile::WriteOnly | QFile::Text)){
+
+        QMessageBox::warning(this,"Error","File is not open!");
+
+    }
+
+    QTextStream out (&file);
+
+    out << bugReport;
 
 }
 

@@ -7,6 +7,8 @@
 #include <QMap>
 #include <QFile>
 #include <QTextStream>
+#include <QPixmap>
+#include <QMessageBox>
 
 using namespace std;
 
@@ -41,7 +43,12 @@ public:
 
     // Methods
 
+    void refreshQRList();
     userType& searchUser();
+
+    // QR Image
+
+    QPixmap *imageQR = new QPixmap("C:/Users/Charles/Documents/QTCreator Projects/CS106Assesment/codeQRImage.png");
 
 private slots:
 
@@ -72,6 +79,12 @@ private slots:
     void on_qrBttn_User_clicked();
 
     void on_QRCodeAddBttn_Admin_clicked();
+
+    void on_reportBugBttn_User_clicked();
+
+    void on_bugReturnBttn_clicked();
+
+    void on_submitBugBttn_clicked();
 
 private:
     Ui::MainWindow *ui;
