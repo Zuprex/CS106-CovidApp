@@ -8,6 +8,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QPixmap>
+#include <QMessageBox>
 
 using namespace std;
 
@@ -78,6 +79,12 @@ private slots:
     void on_qrBttn_User_clicked();
 
     void on_QRCodeAddBttn_Admin_clicked();
+
+    void on_reportBugBttn_User_clicked();
+
+    void on_bugReturnBttn_clicked();
+
+    void on_submitBugBttn_clicked();
 
 private:
     Ui::MainWindow *ui;

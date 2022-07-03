@@ -52,7 +52,7 @@ userType& MainWindow::searchUser(){
 }
 
 // Main Menu (LoginRegister Widget) Buttons:
-// Widgets 0 : Login / 1 :  Register / 2 : User Menu / 3: covidTestsPage / 4: Admin Menu
+// Widgets 0 : Login / 1 :  Register / 2 : User Menu / 3: covidTestsPage / 4: Admin Menu / 5: QRButton / 6: Report Bug
 //-------------------------------------------
 
 // Registration (RegisterPage Widget) Buttons:
@@ -209,6 +209,11 @@ void MainWindow::on_loginBttn_clicked() // Attempts to login NOTE: For realism; 
 // User Menu (UserMenuPage Widget) Buttons:
 //-------------------------------------------
 
+void MainWindow::on_reportBugBttn_User_clicked() // Redirect to bug report page.
+{
+    ui->stackedWidget->setCurrentIndex(6);
+}
+
 void MainWindow::on_qrBttn_User_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
@@ -360,5 +365,31 @@ void MainWindow::on_QRCodeAddBttn_Admin_clicked() // Adds QR Code when admin Mod
     userQRList.remove(searchUser().getFirstName());
     refreshQRList();
     searchUser().setImageQR(true);
+}
+
+// Report Bug Page
+
+void MainWindow::on_bugReturnBttn_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+
+void MainWindow::on_submitBugBttn_clicked()
+{
+    QString bugReport = ui->bugPlainTextEdit->toPlainText();
+
+    QFile file("C:/Users/Charles/Documents/QTCreator Projects/CS106Assesment/bugReport.txt");
+
+    if(!file.open(QFile::WriteOnly | QFile::Text)){
+
+        QMessageBox::warning(this,"Error","File is not open!");
+
+    }
+
+    QTextStream out (&file);
+
+    out << bugReport;
+
 }
 
